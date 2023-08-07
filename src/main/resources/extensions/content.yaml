@@ -1,0 +1,8 @@
+groupVersion: twhzx.halo.run/v1alpha1
+kind: Content
+metadata:
+  name: content
+title: 标题
+keywords: 关键字1, 关键字2, 关键字3
+type: Content
+content: 正文内容

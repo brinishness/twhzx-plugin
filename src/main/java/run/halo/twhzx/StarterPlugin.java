@@ -1,7 +1,9 @@
-package run.halo.starter;
+package run.halo.twhzx;
 
 import org.pf4j.PluginWrapper;
 import org.springframework.stereotype.Component;
+import run.halo.app.extension.Scheme;
+import run.halo.app.extension.SchemeManager;
 import run.halo.app.plugin.BasePlugin;
 
 /**
@@ -14,18 +16,23 @@ import run.halo.app.plugin.BasePlugin;
  */
 @Component
 public class StarterPlugin extends BasePlugin {
+    private final SchemeManager schemeManager;
 
-    public StarterPlugin(PluginWrapper wrapper) {
+    public StarterPlugin(PluginWrapper wrapper, SchemeManager schemeManager) {
         super(wrapper);
+        this.schemeManager = schemeManager;
     }
 
     @Override
     public void start() {
-        System.out.println("插件启动成功！");
+        schemeManager.register(Content.class);
+        System.out.println("内容插件启动！");
     }
 
     @Override
     public void stop() {
-        System.out.println("插件停止！");
+        Scheme contentScheme = schemeManager.get(Content.class);
+        schemeManager.unregister(contentScheme);
+        System.out.println("内容插件停止！");
     }
 }
