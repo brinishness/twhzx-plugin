@@ -50,18 +50,11 @@ public class ContentController {
                 Matcher matcher = pattern.matcher(s.getTitle());
                 Matcher matcher1 = pattern.matcher(s.getKeywords());
                 return matcher.find() | matcher1.find();
-                // System.out.println(s);
-                // if (matcher.find()) {
-                //     return matcher.find();
-                // } else {
-                //     return matcher1.find();
-                // }
-                // return s.getName().equals(name);
             }
         };
-        Comparator<Content> ageComp =
-            (s1, s2) -> s1.getSort() - s2.getSort();
+        Comparator<Content> sortComp =
+            (s1, s2) -> s2.getSort() - s1.getSort();
 
-        return contentServices.list(Content.class, predicate, ageComp, page, size);
+        return contentServices.list(Content.class, predicate, sortComp, page, size);
     }
 }
